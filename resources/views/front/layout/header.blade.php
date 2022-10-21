@@ -30,7 +30,22 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info header-info-right">
                         <ul>
-                            <li><i class="fi-rs-key"></i><a href="login.html">Log In </a>  / <a href="register.html">Sign Up</a></li>
+                            @auth
+                                <li> {{ Auth::user()->name }} مرحبا :</li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                                        خروج
+                                    </a>
+                                </form>
+                            @else
+                                <li><i class="fi-rs-key"></i>
+                                    <a href="{{ route('login') }}">دخول</a>  /
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}">سجل معنا</a>
+                                    @endif
+                                </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -359,17 +374,19 @@
                                 </li>
                                 <li><a href="blog.html">Blog </a></li>
                                 <li><a href="contact.html">Contact</a></li>
-                                <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#">Dashboard</a></li>
-                                        <li><a href="#">Products</a></li>
-                                        <li><a href="#">Categories</a></li>
-                                        <li><a href="#">Coupons</a></li>
-                                        <li><a href="#">Orders</a></li>
-                                        <li><a href="#">Customers</a></li>
-                                        <li><a href="#">Logout</a></li>
-                                    </ul>
-                                </li>
+                                @auth
+                                    <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Dashboard</a></li>
+                                            <li><a href="#">Products</a></li>
+                                            <li><a href="#">Categories</a></li>
+                                            <li><a href="#">Coupons</a></li>
+                                            <li><a href="#">Orders</a></li>
+                                            <li><a href="#">Customers</a></li>
+                                            <li><a href="#">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                @endauth
                             </ul>
                         </nav>
                     </div>
