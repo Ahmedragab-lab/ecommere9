@@ -20,5 +20,6 @@ class UserSeeder extends Seeder
                       'type'=>'admin', 'email_verified_at' => now(),'remember_token' => Str::random(10)]);
         User::create(['name'=>'user user','email'=>'user@app.com','password'=>bcrypt('123123'),'created_at'=>now(),
                       'type'=>'user', 'email_verified_at' => now(),'remember_token' => Str::random(10)]);
+        User::factory(10)->create();
     }
 }

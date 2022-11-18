@@ -8,22 +8,17 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class CategoryFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
     public function definition()
     {
+        $name = $this->faker->unique()->words($nb=6,$asText = true);
+        $slug = Str::slug($name,'-');
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password'=>bcrypt('123123'),
-            'type' => 'user',
-            'remember_token' => Str::random(10),
+            'name'  =>$name,
+            'slug'  =>$slug,
+
         ];
     }
 
